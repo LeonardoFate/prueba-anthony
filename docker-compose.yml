@@ -1,0 +1,23 @@
+version: '3'
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-container
+    environment:
+      - MYSQL_ROOT_PASSWORD=12345  # Contraseña del usuario root
+      - MYSQL_DATABASE=factura  # Base de datos que se va a crear
+      - MYSQL_PASSWORD=123  # Se puede eliminar si no crearás un usuario adicional
+    ports:
+      - "3308:3306"  # Mapeo del puerto local 3308 al puerto 3306 del contenedor
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - mysql_network
+
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  mysql_network:
+    driver: bridge
